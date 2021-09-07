@@ -1,0 +1,12 @@
+snippet eprint
+  print(${0:msg}, file=stderr)
+
+snippet dataclass
+alias dc
+  @dataclass(frozen=True)
+  class ${0:Classname}:
+      ${1:prop}: ${2:type}
+
+snippet enum
+  class ${0:Classname}(Enum):
+      ${1:member} = ${2:auto}
