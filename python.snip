@@ -10,3 +10,7 @@ alias dc
 snippet enum
   class ${0:Classname}(Enum):
       ${1:member} = ${2:auto}
+
+snippet suppress
+  with suppress(${0:Exception}):
+      ${1:pass}
