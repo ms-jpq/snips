@@ -11,6 +11,10 @@ snippet prelude
 
   ${0:exec}
 
+snippet println
+alias pl
+  printf '%s\\n' "${0:...}"
+
 snippet readarray_1
 alias ra1
   readarray -t -d \$'\\n' ${0:ARRAY} < <(${1:CMD})
