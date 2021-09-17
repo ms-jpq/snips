@@ -1,6 +1,9 @@
 snippet debug
   print(vim.inspect{ ${0:var} })
 
+snippet pcall
+  local go, ${0:var} = pcall(${1:fn})
+
 snippet wrap
 abbr co.wrap
   coroutine.wrap(function()
