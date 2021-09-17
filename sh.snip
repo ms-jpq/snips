@@ -11,6 +11,15 @@ snippet prelude
 
   ${0:exec}
 
+snippet cd
+  cd "\$(dirname "\$0")" || exit 1
+
+snippet globopt_f
+  shopt -s globstar failglob
+
+snippet globopt_n
+  shopt -s globstar nullglob
+
 snippet println
 alias pl
   printf '%s\\n' "${0:...}"
