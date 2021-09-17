@@ -20,6 +20,10 @@ snippet globopt_f
 snippet globopt_n
   shopt -s globstar nullglob
 
+snippet require
+  # test if installed
+  hash "${0:BIN_1}" "${0:BIN_2}" "${0:BIN_3}"
+
 snippet println
 alias pl
   printf '%s\\n' "${0:...}"
