@@ -18,3 +18,15 @@ alias ra1
 snippet readarray_2
 alias ra2
   readarray -t -d \$'\\n' ${0:ARRAY} <<< "\$${1:VAR}"
+
+snippet array
+  ${0:ARRAY}=(
+    ${1:VAR}
+  )
+
+snippet for_array
+alias fa
+  for "\$${1:var}" in "\${${0:ARRAY}[@]}"
+  do
+    ${2:...}
+  done
