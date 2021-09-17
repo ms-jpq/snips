@@ -30,3 +30,29 @@ alias tfmt2
 snippet time_fmt_3
 alias tfmt3
   "%Y-%m-%d %H:%M:%S %Z"
+
+snippet main
+  from argparse import ArgumentParser, Namespace
+  from asyncio import run
+  from sys import exit
+
+
+  def _parse_args() -> Namespace:
+      parser = ArgumentParser()
+      ${0}
+      return parser.parse_args()
+
+
+  async def main() -> int:
+      args = _parse_args()
+
+      return 0
+
+
+  if __name__ == "__main__":
+      try:
+          code = run(main())
+      except KeyboardInterrupt:
+          exit(130)
+      else:
+          exit(code)
