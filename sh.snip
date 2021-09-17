@@ -58,12 +58,12 @@ alias fa
 
 snippet heredoc_1
 alias hd_1
-  cat << EOF
-    ${0:...}
+  read -r -d '' ${0:VAR} <<- 'EOF'
+    ${1:...}
   EOF
 
 snippet heredoc_2
 alias hd_2
-  cat <<- EOF
-    ${0:...}
+  read -r -d '' ${0:VAR} <<- EOF
+    ${1:...}
   EOF
