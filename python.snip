@@ -34,7 +34,10 @@ alias tfmt3
 snippet main
   from argparse import ArgumentParser, Namespace
   from asyncio import run
+  from pathlib import Path
   from sys import exit
+
+  TOP_LEVEL = Path(__file__).resolve().parent
 
 
   def _parse_args() -> Namespace:
