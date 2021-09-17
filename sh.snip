@@ -55,3 +55,15 @@ alias fa
   do
     ${2:...}
   done
+
+snippet heredoc_1
+alias hd_1
+  cat << EOF
+    ${0:...}
+  EOF
+
+snippet heredoc_2
+alias hd_2
+  cat <<- EOF
+    ${0:...}
+  EOF
