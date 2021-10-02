@@ -8,16 +8,16 @@ snippet eprint
 snippet dataclass
 alias dc
   @dataclass(frozen=True)
-  class ${0:Classname}:
-      ${1:prop}: ${2:type}
+  class ${1:Classname}:
+      ${2:prop}: ${0:type}
 
 snippet enum
-  class ${0:Classname}(Enum):
-      ${1:member} = ${2:auto()}
+  class ${1:Classname}(Enum):
+      ${2:member} = ${0:auto()}
 
 snippet suppress
-  with suppress(${0:Exception}):
-      ${1:pass}
+  with suppress(${1:Exception}):
+      ${2:pass}
 
 snippet time_fmt_1
 alias tfmt1

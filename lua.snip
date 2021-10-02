@@ -2,7 +2,7 @@ snippet debug
   print(vim.inspect{ ${0:var} })
 
 snippet pcall
-  local go, ${0:var} = pcall(${1:fn})
+  local go, ${1:var} = pcall(${0:fn})
 
 snippet wrap
 abbr co.wrap
@@ -15,6 +15,6 @@ abbr co.yield
   coroutine.yield
 
 snippet iffe
-  local ${0:var} = (function()
-    ${1:return}
+  local ${1:var} = (function()
+    ${0:return}
   end)()
