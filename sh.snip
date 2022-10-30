@@ -1,18 +1,18 @@
 snippet prelude
   #!/usr/bin/env bash
 
-  set -eu
+  set -Eeu
   set -o pipefail
   shopt -s globstar nullglob
 
 
-  cd "\$(dirname "\$0")" || exit 1
+  cd "\$(dirname -- "\$0")" || exit 1
 
 
   ${0:exec}
 
 snippet cd
-  cd "\$(dirname "\$0")" || exit 1
+  cd "\$(dirname -- "\$0")" || exit 1
 
 snippet globopt_f
   shopt -s globstar failglob
