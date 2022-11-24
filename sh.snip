@@ -6,7 +6,7 @@ snippet prelude
   shopt -s globstar nullglob
 
 
-  cd "\$(dirname -- "\$0")" || exit 1
+  cd -- "\$(dirname -- "\$0")" || exit 1
 
 
   ${0:exec --}
@@ -22,7 +22,7 @@ snippet globopt_n
 
 snippet require
   # test if installed
-  hash "${0:BIN_1}" "${0:BIN_2}" "${0:BIN_3}"
+  hash -- "${0:BIN_1}" "${0:BIN_2}" "${0:BIN_3}"
 
 snippet println
 alias pl
