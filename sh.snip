@@ -56,14 +56,8 @@ alias fa
     ${2:...}
   done
 
-snippet heredoc_1
-alias hd_1
-  cat <<- 'EOF'
-    ${0:...}
-  EOF
-
-snippet heredoc_2
-alias hd_2
-  cat <<- EOF
+snippet heredoc
+alias hd
+  read -r -d '' <<-'EOF' || true
     ${0:...}
   EOF
