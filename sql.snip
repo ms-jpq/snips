@@ -23,11 +23,12 @@ snippet columns
     table_schema,
     table_name,
     column_name,
-    data_type,
+    case
+      when (data_type = 'USER-DEFINED') then udt_schema || '.' || udt_name
+      else data_type
+    end as data_type,
     is_nullable,
-    column_default,
-    udt_schema,
-    udt_name
+    column_default
   FROM
     information_schema.columns
   WHERE
