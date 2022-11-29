@@ -47,3 +47,27 @@ snippet enums
     pg_type.typname LIKE '%${1:enum}%';
 
   $0
+
+
+snippet constraints
+  SELECT
+    *
+  FROM
+    information_schema.table_constraints
+  WHERE
+    table_schema LIKE '%%'
+    AND table_name LIKE '%%';
+
+  $0
+
+
+snippet foreign_keys
+alias fk
+  SELECT
+    *
+  FROM
+    information_schema.referential_constraints
+  WHERE
+    constraint_name LIKE '%${1:name}%';
+
+  $0
