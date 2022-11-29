@@ -1,0 +1,48 @@
+snippet schemas
+alias schemata
+  SELECT
+    *
+  FROM
+    information_schema.schemata;
+
+  $0
+
+snippet tables
+  SELECT
+    *
+  FROM
+    information_schema.tables
+  WHERE
+    table_schema LIKE '%${1:schema}%'
+    AND table_name LIKE '%${2:name}%';
+
+  $0
+
+snippet columns
+  SELECT
+    table_schema,
+    table_name,
+    column_name,
+    data_type,
+    is_nullable,
+    column_default,
+    udt_schema,
+    udt_name
+  FROM
+    information_schema.columns
+  WHERE
+    table_name LIKE '%${1:name}%';
+
+  $0
+
+snippet enums
+  SELECT
+    pg_type.typname,
+    pg_enum.enumlabel
+  FROM
+    pg_type
+    JOIN pg_enum ON pg_enum.enumtypid = pg_type.oid
+  WHERE
+    pg_type.typname LIKE '%${1:enum}%';
+
+  $0
