@@ -1,6 +1,4 @@
-snippet schemas
-alias ansi-schemas
-alias schemata
+snippet ansi-schemas
 abbr ANSI -> schemas
   SELECT
     *
@@ -10,23 +8,21 @@ abbr ANSI -> schemas
   $0
 
 
-snippet tables
-alias ansi-tables
-abbr ANSI -> table info
+snippet ansi-tables
+abbr ANSI -> tables
   SELECT
     *
   FROM
     information_schema.tables
   WHERE
     table_schema LIKE '%${1:schema}%'
-    AND table_name LIKE '%${2:name}%';
+    AND table_name LIKE '%${2:table}%';
 
   $0
 
 
-snippet columns
-alias ansi-columns
-abbr ANSI -> column info
+snippet ansi-columns
+abbr ANSI -> columns
   SELECT
     table_schema,
     table_name,
@@ -37,14 +33,13 @@ abbr ANSI -> column info
   FROM
     information_schema.columns
   WHERE
-    table_name LIKE '%${1:name}%'
-    AND column_name LIKE '%${2:name}%';
+    table_schema LIKE '%${1:schema}%'
+    AND column_name LIKE '%${2:column}%';
 
   $0
 
 
-snippet enums
-alias pg-enums
+snippet pg-enums
 abbr PG -> enum type
   SELECT
     pg_type.typname,
@@ -58,29 +53,26 @@ abbr PG -> enum type
   $0
 
 
-snippet constraints
-alias ansi-constraints
+snippet ansi-constraints
 abbr ANSI -> constraints
   SELECT
     *
   FROM
     information_schema.table_constraints
   WHERE
-    table_schema LIKE '%%'
-    AND table_name LIKE '%%';
+    table_schema LIKE '%${1:schema}%'
+    AND table_name LIKE '%${2:table}%';
 
   $0
 
 
-snippet foreign_keys
-alias fk
-alias ansi-fk
+snippet ansi-fk
 abbr ANSI -> foreign keys
   SELECT
     *
   FROM
     information_schema.referential_constraints
   WHERE
-    constraint_name LIKE '%${1:name}%';
+    constraint_name LIKE '%${1:constraint}%';
 
   $0
