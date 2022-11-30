@@ -1,5 +1,7 @@
 snippet schemas
+alias ansi-schemas
 alias schemata
+abbr ANSI -> schemas
   SELECT
     *
   FROM
@@ -7,7 +9,10 @@ alias schemata
 
   $0
 
+
 snippet tables
+alias ansi-tables
+abbr ANSI -> table info
   SELECT
     *
   FROM
@@ -18,25 +23,29 @@ snippet tables
 
   $0
 
+
 snippet columns
+alias ansi-columns
+abbr ANSI -> column info
   SELECT
     table_schema,
     table_name,
     column_name,
-    case
-      when (data_type = 'USER-DEFINED') then udt_schema || '.' || udt_name
-      else data_type
-    end as data_type,
+    data_type,
     is_nullable,
     column_default
   FROM
     information_schema.columns
   WHERE
-    table_name LIKE '%${1:name}%';
+    table_name LIKE '%${1:name}%'
+    AND column_name LIKE '%${2:name}%';
 
   $0
 
+
 snippet enums
+alias pg-enums
+abbr PG -> enum type
   SELECT
     pg_type.typname,
     pg_enum.enumlabel
@@ -50,6 +59,8 @@ snippet enums
 
 
 snippet constraints
+alias ansi-constraints
+abbr ANSI -> constraints
   SELECT
     *
   FROM
@@ -63,6 +74,8 @@ snippet constraints
 
 snippet foreign_keys
 alias fk
+alias ansi-fk
+abbr ANSI -> foreign keys
   SELECT
     *
   FROM
