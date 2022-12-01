@@ -6,58 +6,122 @@ snippet prelude
   shopt -s globstar nullglob
 
 
-  cd -- "\$(dirname -- "\$0")" || exit 1
-
+  cd -- "\$(dirname -- "\$1")" || exit 1
 
   ${0:exec --}
 
-snippet cd
-  cd "\$(dirname -- "\$0")" || exit 1
 
-snippet globopt_f
+snippet cd
+  cd "\$(dirname -- "\$1")" || exit 1
+
+  $0
+
+
+snippet which
+abbr posix which
+  command -v -- ${1:command}
+
+
+snippet failglob
+alias glob
   shopt -s globstar failglob
 
-snippet globopt_n
+  $0
+
+
+snippet nullglob
+alias glob
   shopt -s globstar nullglob
 
-snippet require
+  $0
+
+
+snippet lc
+  export LC_ALL=C
+  export LANG=C
+
+  $0
+
+
+snippet trap
+  cleanup() {
+    ${0:...}
+  }
+
+  # NOT POSIX
+  trap cleanup EXIT
+
+
+snippet hash
   # test if installed
-  hash -- "${0:BIN_1}" "${0:BIN_2}" "${0:BIN_3}"
+  hash -- ${1:BIN_1} ${2:BIN_2}
+
+  $0
+
 
 snippet println
 alias pl
-  printf '%s\\n' "${0:...}"
+  printf '%s\\n' "${1:...}"
+
+  $0
+
+
+snippet pass
+abbr :
+  :
+
 
 snippet stderr
 alias err
   >&2
 
+
 snippet stdout
 alias out
   2>&1
 
-snippet readarray_1
-alias ra1
-  readarray -t -d \$'\\n' ${0:ARRAY} < <(${1:CMD})
 
-snippet readarray_2
-alias ra2
-  readarray -t -d \$'\\n' ${0:ARRAY} <<< "\$${1:VAR}"
+snippet readarray
+alias ra
+abbr read <(cmd)
+  readarray -t -d \$'\\n' -- ${2:ARRAY} < <(${1:command})
+
+  $0
+
+
+snippet readarray
+alias ra
+abbr read <<< "$VARIABLE"
+  readarray -t -d \$'\\n' -- ${2:ARRAY} <<< "\$${1:VARIABLE}"
+
+  $0
+
 
 snippet array
-  ${0:ARRAY}=(
-    ${1:VAR}
+  ${1:ARRAY}=(
+    ${2:item}
   )
 
-snippet for_array
-alias fa
-  for "\$${1:var}" in "\${${0:ARRAY}[@]}"
+  $0
+
+
+snippet for
+  for ${1:var} in "\${${2:ARRAY}[@]}"
   do
-    ${2:...}
+    ${0:...}
   done
+
 
 snippet heredoc
 alias hd
-  read -r -d '' <<-'EOF' || true
+  read -r -d '' -- ${1:VARIABLE} <<-'EOF' || true
     ${0:...}
   EOF
+
+
+snippet lstrip
+  "\${${1:VARIABLE}##"\$${2:CHARS}"}"
+
+
+snippet rstrip
+  "\${${1:VARIABLE}%%"\$${2:CHARS}"}"

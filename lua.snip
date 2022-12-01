@@ -1,8 +1,10 @@
 snippet debug
   print(vim.inspect{ ${0:var} })
 
+
 snippet pcall
   local go, ${1:var} = pcall(${0:fn})
+
 
 snippet wrap
 abbr co.wrap
@@ -10,9 +12,11 @@ abbr co.wrap
     ${0}
   end)
 
+
 snippet yield
 abbr co.yield
-  coroutine.yield
+  coroutine.yield($0)
+
 
 snippet iffe
   local ${1:var} = (function()
