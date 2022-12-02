@@ -34,7 +34,8 @@ abbr ANSI -> columns
     information_schema.columns
   WHERE
     table_schema LIKE '%${1:schema}%'
-    AND column_name LIKE '%${2:column}%';
+    AND table_name LIKE '%${2:table}%'
+    AND column_name LIKE '%${3:column}%';
 
   $0
 
