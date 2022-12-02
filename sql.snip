@@ -56,13 +56,46 @@ abbr PG -> enum type
 
 snippet ansi-constraints
 abbr ANSI -> constraints
+  WITH
+    constraints AS (
+      SELECT
+        kcu.table_schema,
+        kcu.table_name,
+        kcu.column_name,
+        tc.constraint_type
+      FROM
+        information_schema.key_column_usage AS kcu
+        JOIN information_schema.table_constraints AS tc ON tc.table_schema = kcu.table_schema
+        AND tc.table_name = kcu.table_name
+        AND tc.constraint_name = kcu.constraint_name
+    )
   SELECT
-    *
+    c.table_schema,
+    c.table_name,
+    c.column_name,
+    c.data_type,
+    c.is_nullable,
+    c.column_default,
+    ARRAY_AGG (cs.constraint_type) AS constraints
   FROM
-    information_schema.table_constraints
-  WHERE
-    table_schema LIKE '%${1:schema}%'
-    AND table_name LIKE '%${2:table}%';
+    information_schema.columns AS c
+    LEFT JOIN constraints AS cs ON cs.table_schema = c.table_schema
+    AND cs.table_name = c.table_name
+    AND cs.column_name = c.column_name
+  GROUP BY
+    c.table_schema,
+    c.table_name,
+    c.column_name,
+    c.data_type,
+    c.is_nullable,
+    c.column_default
+  HAVING
+    c.table_schema LIKE '%${1:schema}%'
+    AND c.table_name LIKE '%${2:table}%'
+  ORDER BY
+    table_schema,
+    table_name,
+    column_name;
 
   $0
 
@@ -70,10 +103,30 @@ abbr ANSI -> constraints
 snippet ansi-fk
 abbr ANSI -> foreign keys
   SELECT
-    *
+    kcu1.table_schema AS schema,
+    kcu1.table_name AS table,
+    kcu1.column_name AS column,
+    kcu2.table_schema AS referenced_schema,
+    kcu2.table_name AS referenced_table,
+    kcu2.column_name AS referenced_column
   FROM
-    information_schema.referential_constraints
+    information_schema.referential_constraints AS rc
+    JOIN information_schema.key_column_usage AS kcu1 ON kcu1.constraint_schema = rc.constraint_schema
+    AND kcu1.constraint_name = rc.constraint_name
+    JOIN information_schema.key_column_usage AS kcu2 ON kcu2.constraint_schema = rc.unique_constraint_schema
+    AND kcu2.constraint_name = rc.unique_constraint_name
   WHERE
-    constraint_name LIKE '%${1:constraint}%';
+    (
+      kcu1.table_schema LIKE '%${1:schema}%'
+      OR kcu2.table_schema LIKE '%${1:schema}%'
+    )
+    AND (
+      kcu1.table_name LIKE '%${2:table}%'
+      OR kcu2.table_name LIKE '%${2:table}%'
+    )
+    AND (
+      kcu1.column_name LIKE '%${3:column}%'
+      OR kcu2.column_name LIKE '%${3:column}%'
+    );
 
   $0
