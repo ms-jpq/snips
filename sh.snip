@@ -6,13 +6,13 @@ snippet prelude
   shopt -s globstar nullglob
 
 
-  cd -- "\$(dirname -- "\$1")" || exit 1
+  cd -- "\$(dirname -- "\$0")" || exit 1
 
   ${0:exec --}
 
 
 snippet cd
-  cd "\$(dirname -- "\$1")" || exit 1
+  cd "\$(dirname -- "\$0")" || exit 1
 
   $0
 
