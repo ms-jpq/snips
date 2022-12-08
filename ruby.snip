@@ -1,3 +1,17 @@
 snippet bug
 alias debug
   require('debug'); binding.debugger
+
+
+snippet sql
+  sql = <<-'SQL'
+    ${0:SELECT ...}
+  SQL
+
+
+
+snippet graphql
+alias gql
+  query = <<-'GRAPHQL'
+    ${0:query ...}
+  GRAPHQL
