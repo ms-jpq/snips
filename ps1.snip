@@ -1,0 +1,12 @@
+snippet prelude
+  #!/usr/bin/env -S pwsh
+
+  Set-StrictMode -Version 'Latest'
+  \$ErrorActionPreference = 'Stop'
+  \$PSNativeCommandUseErrorActionPreference = \$true
+
+  Set-Location -- "\$PSScriptRoot"
+
+
+  ${0:Switch-Process -- }
+

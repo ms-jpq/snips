@@ -62,6 +62,7 @@ abbr ANSI -> constraints
         kcu.table_schema,
         kcu.table_name,
         kcu.column_name,
+        kcu.constraint_name,
         tc.constraint_type
       FROM
         information_schema.key_column_usage AS kcu
@@ -76,7 +77,8 @@ abbr ANSI -> constraints
     c.data_type,
     c.is_nullable,
     c.column_default,
-    ARRAY_AGG (cs.constraint_type) AS constraints
+    ARRAY_AGG (cs.constraint_type) AS constraints,
+    ARRAY_AGG (cs.constraint_name) AS constraint_names
   FROM
     information_schema.columns AS c
     LEFT JOIN constraints AS cs ON cs.table_schema = c.table_schema
