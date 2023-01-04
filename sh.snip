@@ -13,7 +13,6 @@ snippet prelude
 
 snippet cd
   cd "\$(dirname -- "\$0")" || exit 1
-
   $0
 
 
@@ -45,23 +44,25 @@ snippet lc
 
 snippet trap
   cleanup() {
-    ${0:...}
+    # shellcheck disable=SC2046
+    kill -- \$(jobs -p)
+    printf '\\n%s\\n' 'killing children... please wait'
+    wait
+    printf -- '%s\\n' 'hasta la vista,'
+    $0
   }
 
-  # NOT POSIX
-  trap cleanup EXIT
+  trap -- cleanup EXIT # Not POSIX
 
 
 snippet hash
   hash -- ${1:BIN_1} ${2:BIN_2}
-
   $0
 
 
 snippet println
 alias pl
   printf '%s\\n' "${1:...}"
-
   $0
 
 
@@ -84,7 +85,6 @@ snippet readarray
 alias ra
 abbr read <(cmd)
   readarray -t -d \$'\\n' -- ${2:ARRAY} < <(${1:command})
-
   $0
 
 
@@ -92,7 +92,6 @@ snippet readarray
 alias ra
 abbr read <<< "$VARIABLE"
   readarray -t -d \$'\\n' -- ${2:ARRAY} <<< "\$${1:VARIABLE}"
-
   $0
 
 
@@ -100,7 +99,6 @@ snippet array
   ${1:ARRAY}=(
     ${2:item}
   )
-
   $0
 
 
@@ -124,3 +122,9 @@ snippet lstrip
 
 snippet rstrip
   "\${${1:VARIABLE}%%"\$${2:CHARS}"}"
+
+
+snippet shellcheck-disable
+alias sc
+alias disable
+  # shellcheck disable=SC${0:0000}
