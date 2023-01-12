@@ -62,8 +62,7 @@ snippet hash
 
 snippet println
 alias pl
-  printf '%s\\n' "${1:...}"
-  $0
+  printf -- '%s\\n' "${1:...}"
 
 
 snippet pass
@@ -85,13 +84,6 @@ snippet readarray
 alias ra
 abbr read <(cmd)
   readarray -t -d \$'\\n' -- ${2:ARRAY} < <(${1:command})
-  $0
-
-
-snippet readarray
-alias ra
-abbr read <<< "$VARIABLE"
-  readarray -t -d \$'\\n' -- ${2:ARRAY} <<< "\$${1:VARIABLE}"
   $0
 
 
@@ -117,12 +109,30 @@ alias hd
 
 
 snippet lstrip
-  "\${${1:VARIABLE}##"\$${2:CHARS}"}"
+  "\${${1:VARIABLE}##'${2:CHARS}'}"
 
 
 snippet rstrip
-  "\${${1:VARIABLE}%%"\$${2:CHARS}"}"
+  "\${${1:VARIABLE}%%'${2:CHARS}'}"
 
+
+snippet tr
+  "\${${1:VARIABLE}//'${2:PATTERN}'/'${3:REPLACE}'}"
+
+
+snippet quote
+  printf -- '%q' "\$${1:VARIABLE}"
+
+
+snippet join
+  join() {
+    for arg in "\$@"
+    do
+      printf -- '%q ' "\$arg"
+    done
+  }
+
+  $0
 
 snippet shellcheck-disable
 alias sc
