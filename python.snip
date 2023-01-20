@@ -39,7 +39,6 @@ snippet time_fmt_3
 
 snippet main
   from argparse import ArgumentParser, Namespace
-  from asyncio import run
   from pathlib import Path
   from sys import exit
 
@@ -48,19 +47,18 @@ snippet main
 
   def _parse_args() -> Namespace:
       parser = ArgumentParser()
-      ${0}
       return parser.parse_args()
 
 
-  async def main() -> int:
+  def main() -> int:
       args = _parse_args()
-
+      $0
       return 0
 
 
   if __name__ == "__main__":
       try:
-          code = run(main())
+          code = main()
       except KeyboardInterrupt:
           exit(130)
       else:
