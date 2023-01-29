@@ -1,8 +1,9 @@
 snippet prelude
-  #!/usr/bin/env -S pwsh
+  #!/usr/bin/env -S -- pwsh -NoProfile -NonInteractive
 
   Set-StrictMode -Version 'Latest'
   \$ErrorActionPreference = 'Stop'
+  \$PSStyle.OutputRendering = 'PlainText'
   \$PSNativeCommandUseErrorActionPreference = \$true
 
   Set-Location -- "\$PSScriptRoot"
