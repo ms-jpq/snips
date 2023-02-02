@@ -2,13 +2,11 @@ snippet prelude
 alias shebang
   #!/usr/bin/env -S -- swipl
 
-  :- initialization(main).
+  :- initialization(main, main).
 
   main(_Argv) :-
       current_prolog_flag(os_argv, [_, Arg0|_]),
       file_directory_name(Arg0, Dir),
       chdir(Dir),
 
-      $0
-
-      halt.
+      ${0:true.}
