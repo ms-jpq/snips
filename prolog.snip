@@ -10,3 +10,52 @@ alias shebang
       chdir(Dir),
 
       ${0:true.}
+
+
+snippet call
+    setup_call_cleanup(process_create(path(${1:ls}),
+                                      [],
+                                      [stdout(pipe(P1))]),
+                       read_string(P1, _, Out),
+                       close(P1)),
+    ${0:write(Out).}
+
+
+snippet pipe
+  setup_call_cleanup(( process_create(path(${1:ls}),
+                                      [],
+                                      [stdout(pipe(P1))]),
+                       process_create(path(${1:tee}),
+                                      [],
+                                      [ stdin(stream(P1)),
+                                        stdout(pipe(P2))
+                                      ])
+                     ),
+                     read_string(P2, _, Out),
+                     ( close(P1),
+                       close(P2)
+                     )),
+  ${0:write(Out).}
+
+
+snippet slurp
+abbr read
+  read_file_to_string(${1:File}, ${2:String}, []),
+  ${0:write(String).}
+
+
+snippet spit
+abbr write
+  setup_call_cleanup(( open(${1:File}, write, S1),
+                       write(S1, String)
+                     ),
+                     true,
+                     close(S1)).
+  ${0:true.}
+
+
+snippet json_loads
+    open_string(${1:String}, S1),
+    json_read_dict(S1, JSON),
+    ${0:writeln(JSON).}
+
