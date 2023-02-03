@@ -44,12 +44,14 @@ snippet time_fmt_3
   "%Y-%m-%d %H:%M:%S %Z"
 
 
-snippet main
+snippet prelude
+  #!/usr/bin/env -S -- PYTHONSAFEPATH= python3
+
   from argparse import ArgumentParser, Namespace
   from pathlib import Path
   from sys import exit
 
-  TOP_LEVEL = Path(__file__).resolve().parent
+  _TOP_LEVEL = Path(__file__).resolve(strict=True).parent
 
 
   def _parse_args() -> Namespace:
