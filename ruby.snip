@@ -1,3 +1,12 @@
+snippet prelude
+  #!/usr/bin/env -S -- ruby
+  # frozen_string_literal: true
+
+  ::Dir.chdir(__dir__)
+
+  $0
+
+
 snippet bug
 alias debug
   require('debug'); binding.debugger
