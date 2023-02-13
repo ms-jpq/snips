@@ -2,9 +2,25 @@ snippet prelude
   #!/usr/bin/env -S -- ruby
   # frozen_string_literal: true
 
+  ::Kernel.require("optparse")
+
   ::Dir.chdir(__dir__)
 
-  $0
+  ::Module.new do
+    options, args =
+      {}.then do |into|
+        parsed =
+          ::OptionParser
+            .new do |parser|
+              $1
+            end
+            .parse(::ARGV, into:)
+        [into, parsed]
+      end
+
+    ::Kernel.exec(${0:*::ARGV})
+  end
+
 
 
 snippet bug
