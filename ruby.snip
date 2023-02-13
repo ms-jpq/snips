@@ -12,7 +12,7 @@ snippet prelude
         parsed =
           ::OptionParser
             .new do |parser|
-              $1
+              parser.on(${1:'--verbose', ::TrueClass})
             end
             .parse(::ARGV, into:)
         [into, parsed]
