@@ -1,10 +1,5 @@
 snippet prelude
-  #!/usr/bin/env bash
-
-  set -Eeu
-  set -o pipefail
-  shopt -s nullglob globstar
-
+  #!/usr/bin/env -S -- bash -Eeuo pipefail -O nullglob -O globstar
 
   cd -- "\$(dirname -- "\$0")" || exit 1
 
@@ -17,20 +12,19 @@ snippet cd
 
 
 snippet which
-abbr posix which
   command -v -- ${1:command}
 
 
 snippet failglob
 alias glob
-  shopt -s globstar failglob
+  shopt -s failglob globstar
 
   $0
 
 
 snippet nullglob
 alias glob
-  shopt -s globstar nullglob
+  shopt -s nullglob globstar
 
   $0
 
