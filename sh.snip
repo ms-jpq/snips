@@ -1,5 +1,5 @@
 snippet prelude
-  #!/usr/bin/env -S -- bash -Eeuo pipefail -O nullglob -O globstar
+  #!/usr/bin/env -S -- bash -Eeuo pipefail -O failglob -O globstar
 
   cd -- "\$(dirname -- "\$0")" || exit 1
 
