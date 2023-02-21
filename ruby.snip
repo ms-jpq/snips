@@ -28,14 +28,21 @@ alias debug
   require('debug'); binding.debugger
 
 
+snippet heredoc
+alias hc
+  variable = <<~${1:HEREDOC}
+    ${0:...}
+  ${1:HEREDOC}
+
+
 snippet sql
-  sql = <<-'SQL'
+  sql = <<~'SQL'
     ${0:SELECT ...}
   SQL
 
 
 snippet graphql
 alias gql
-  query = <<-'GRAPHQL'
+  query = <<~'GRAPHQL'
     ${0:query ...}
   GRAPHQL
