@@ -11,6 +11,11 @@ abbr argparse
   LONG_OPTS='verbose'
   eval set -- "\$(getopt --options="\$OPTS" --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
 
+  if [[ \$# -eq 1 ]]; then
+    head --lines 5 -- "\$0"
+    exit 1
+  fi
+
   VERBOSE=0
   while true; do
     case "\$1" in
