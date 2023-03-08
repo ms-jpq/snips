@@ -5,6 +5,31 @@ snippet prelude
 
   ${0:exec --}
 
+snippet parse
+abbr argparse
+  OPTS='v'
+  LONG_OPTS='verbose'
+
+  PARSED="\$(getopt --options="\$OPTS" --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
+  eval set -- "$PARSED"
+
+  VERBOSE=0
+  while true; do
+    case "\$1" in
+    -v | --verbose)
+      VERBOSE=1
+      shift
+      ;;
+    --)
+      shift
+      ;;
+    *)
+      break
+      ;;
+    esac
+  done
+
+  $0
 
 snippet cd
   cd "\$(dirname -- "\$0")"
@@ -38,15 +63,10 @@ snippet lc
 
 snippet trap
   cleanup() {
-    # shellcheck disable=SC2046
-    kill -- \$(jobs -p)
-    printf '\\n%s\\n' 'killing children... please wait'
-    wait
-    printf -- '%s\\n' 'hasta la vista,'
-    $0
+    ${0::}
   }
 
-  trap -- cleanup EXIT # Not POSIX
+  trap -- cleanup EXIT
 
 
 snippet hash
