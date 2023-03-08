@@ -9,9 +9,7 @@ snippet parse
 abbr argparse
   OPTS='v'
   LONG_OPTS='verbose'
-
-  PARSED="\$(getopt --options="\$OPTS" --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
-  eval set -- "$PARSED"
+  eval set -- "\$(getopt --options="\$OPTS" --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
 
   VERBOSE=0
   while true; do
