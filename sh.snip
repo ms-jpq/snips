@@ -125,6 +125,12 @@ alias hd
   EOF
 
 
+snippet tee
+  tee <<-'EOF'
+    ${0:...}
+  EOF
+
+
 snippet lstrip
   "\${${1:VARIABLE}##'${2:CHARS}'}"
 
