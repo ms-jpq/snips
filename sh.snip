@@ -7,9 +7,8 @@ snippet prelude
 
 snippet parse
 abbr argparse
-  OPTS='v'
   LONG_OPTS='verbose'
-  eval set -- "\$(getopt --options="\$OPTS" --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
+  eval set -- "\$(getopt --options='' --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
 
   if [[ \$# -eq 1 ]]; then
     head --lines 5 -- "\$0"
