@@ -157,6 +157,13 @@ snippet join
 
   $0
 
+
+snippet ifs
+  IFS=${1:' '}
+  $0
+  unset -- IFS
+
+
 snippet shellcheck-disable
 alias sc
 alias disable
