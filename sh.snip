@@ -78,7 +78,11 @@ snippet hash
 
 snippet println
 alias pl
-  printf -- '%s\\n' "${1:...}"
+  printf -- '%s\\n' $0
+
+
+snippet join
+  printf -- '%q ' $0
 
 
 snippet pass
@@ -119,46 +123,31 @@ snippet for
 
 snippet heredoc
 alias hd
-  read -r -d '' -- ${1:VARIABLE} <<-'EOF' || true
+  read -r -d '' -- ${1:VARIABLE} <<-EOF || true
     ${0:...}
   EOF
 
 
 snippet tee
-  tee <<-'EOF'
+  tee <<-EOF
     ${0:...}
   EOF
 
 
 snippet lstrip
-  "\${${1:VARIABLE}##'${2:CHARS}'}"
+  "\${${1:VARIABLE}##'${2:GLOB}'}"
 
 
 snippet rstrip
-  "\${${1:VARIABLE}%%'${2:CHARS}'}"
+  "\${${1:VARIABLE}%%'${2:GLOB}'}"
 
 
 snippet tr
-  "\${${1:VARIABLE}//'${2:PATTERN}'/'${3:REPLACE}'}"
-
-
-snippet quote
-  printf -- '%q' "\$${1:VARIABLE}"
-
-
-snippet join
-  join() {
-    for arg in "\$@"
-    do
-      printf -- '%q ' "\$arg"
-    done
-  }
-
-  $0
+  "\${${1:VARIABLE}//'${2:GLOB}'/'${3:REPLACE}'}"
 
 
 snippet ifs
-  IFS=${1:' '}
+  IFS=\$'${1:\\n}'
   $0
   unset -- IFS
 
