@@ -15,8 +15,8 @@ abbr ANSI -> tables
   FROM
     information_schema.tables
   WHERE
-    table_schema LIKE '%${1:schema}%'
-    AND table_name LIKE '%${2:table}%';
+    table_schema LIKE '%public%'
+    AND table_name LIKE '%${1:table}%';
 
   $0
 
@@ -33,9 +33,9 @@ abbr ANSI -> columns
   FROM
     information_schema.columns
   WHERE
-    table_schema LIKE '%${1:schema}%'
-    AND table_name LIKE '%${2:table}%'
-    AND column_name LIKE '%${3:column}%';
+    table_schema LIKE '%public%'
+    AND table_name LIKE '%${1:table}%'
+    AND column_name LIKE '%${2:column}%';
 
   $0
 
@@ -92,8 +92,8 @@ abbr ANSI -> constraints
     c.is_nullable,
     c.column_default
   HAVING
-    c.table_schema LIKE '%${1:schema}%'
-    AND c.table_name LIKE '%${2:table}%'
+    c.table_schema LIKE '%public%'
+    AND c.table_name LIKE '%${1:table}%'
   ORDER BY
     table_schema,
     table_name,
@@ -119,16 +119,16 @@ abbr ANSI -> foreign keys
     AND kcu2.constraint_name = rc.unique_constraint_name
   WHERE
     (
-      kcu1.table_schema LIKE '%${1:schema}%'
-      OR kcu2.table_schema LIKE '%${1:schema}%'
+      kcu1.table_schema LIKE '%public%'
+      OR kcu2.table_schema LIKE '%public%'
     )
     AND (
-      kcu1.table_name LIKE '%${2:table}%'
-      OR kcu2.table_name LIKE '%${2:table}%'
+      kcu1.table_name LIKE '%${1:table}%'
+      OR kcu2.table_name LIKE '%${1:table}%'
     )
     AND (
-      kcu1.column_name LIKE '%${3:column}%'
-      OR kcu2.column_name LIKE '%${3:column}%'
+      kcu1.column_name LIKE '%${2:column}%'
+      OR kcu2.column_name LIKE '%${2:column}%'
     );
 
   $0
