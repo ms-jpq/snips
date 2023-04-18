@@ -11,12 +11,18 @@ abbr ANSI -> schemas
 snippet ansi-tables
 abbr ANSI -> tables
   SELECT
-    *
+    table_schema,
+    table_type,
+    table_name
   FROM
     information_schema.tables
   WHERE
     table_schema LIKE '%public%'
-    AND table_name LIKE '%${1:table}%';
+    AND table_name LIKE '%${1:table}%'
+  ORDER BY
+    table_schema,
+    table_type,
+    table_name;
 
   $0
 
