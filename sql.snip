@@ -85,14 +85,14 @@ abbr ANSI -> constraints
     ),
     v AS (
       SELECT
-        c.table_schema,
         c.table_name,
         c.column_name,
         c.is_nullable,
         c.data_type,
         c.column_default,
         ARRAY_AGG(cs.constraint_type) AS constraints,
-        ARRAY_AGG(cs.constraint_name) AS constraint_names
+        ARRAY_AGG(cs.constraint_name) AS constraint_names,
+        c.table_schema
       FROM
         information_schema.columns AS c
         LEFT JOIN constraints AS cs ON cs.table_schema = c.table_schema
