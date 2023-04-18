@@ -11,9 +11,9 @@ abbr ANSI -> schemas
 snippet ansi-tables
 abbr ANSI -> tables
   SELECT
-    table_schema,
     table_type,
-    table_name
+    table_name,
+    table_schema
   FROM
     information_schema.tables
   WHERE
@@ -30,12 +30,12 @@ abbr ANSI -> tables
 snippet ansi-columns
 abbr ANSI -> columns
   SELECT
-    table_schema,
     table_name,
     column_name,
     is_nullable,
     data_type,
-    column_default
+    column_default,
+    table_schema
   FROM
     information_schema.columns
   WHERE
@@ -72,11 +72,11 @@ abbr ANSI -> constraints
   WITH
     constraints AS (
       SELECT
-        kcu.table_schema,
         kcu.table_name,
         kcu.column_name,
         kcu.constraint_name,
-        tc.constraint_type
+        tc.constraint_type,
+        kcu.table_schema
       FROM
         information_schema.key_column_usage AS kcu
         JOIN information_schema.table_constraints AS tc ON tc.table_schema = kcu.table_schema
@@ -131,12 +131,12 @@ abbr ANSI -> foreign keys
   WITH
     v AS (
       SELECT
-        kcu2.table_schema AS ref_shm,
         kcu2.table_name AS ref_tbl,
-        kcu2.column_name AS ref_col,
-        kcu1.table_schema AS shm,
         kcu1.table_name AS tbl,
-        kcu1.column_name AS col
+        kcu2.column_name AS ref_col,
+        kcu1.column_name AS col,
+        kcu2.table_schema AS ref_shm,
+        kcu1.table_schema AS shm
       FROM
         information_schema.referential_constraints AS rc
         JOIN information_schema.key_column_usage AS kcu1 ON kcu1.constraint_schema = rc.constraint_schema
