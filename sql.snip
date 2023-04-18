@@ -27,15 +27,22 @@ abbr ANSI -> columns
     table_schema,
     table_name,
     column_name,
-    data_type,
     is_nullable,
+    data_type,
     column_default
   FROM
     information_schema.columns
   WHERE
     table_schema LIKE '%public%'
     AND table_name LIKE '%${1:table}%'
-    AND column_name LIKE '%${2:column}%';
+    AND column_name LIKE '%${2:column}%'
+  ORDER BY
+    table_schema,
+    table_name,
+    column_name,
+    is_nullable DESC,
+    data_type,
+    column_default;
 
   $0
 
@@ -69,34 +76,45 @@ abbr ANSI -> constraints
         JOIN information_schema.table_constraints AS tc ON tc.table_schema = kcu.table_schema
         AND tc.table_name = kcu.table_name
         AND tc.constraint_name = kcu.constraint_name
+    ),
+    v AS (
+      SELECT
+        c.table_schema,
+        c.table_name,
+        c.column_name,
+        c.is_nullable,
+        c.data_type,
+        c.column_default,
+        ARRAY_AGG(cs.constraint_type) AS constraints,
+        ARRAY_AGG(cs.constraint_name) AS constraint_names
+      FROM
+        information_schema.columns AS c
+        LEFT JOIN constraints AS cs ON cs.table_schema = c.table_schema
+        AND cs.table_name = c.table_name
+        AND cs.column_name = c.column_name
+      GROUP BY
+        c.table_schema,
+        c.table_name,
+        c.column_name,
+        c.data_type,
+        c.is_nullable,
+        c.column_default
     )
   SELECT
-    c.table_schema,
-    c.table_name,
-    c.column_name,
-    c.data_type,
-    c.is_nullable,
-    c.column_default,
-    ARRAY_AGG (cs.constraint_type) AS constraints,
-    ARRAY_AGG (cs.constraint_name) AS constraint_names
+    *
   FROM
-    information_schema.columns AS c
-    LEFT JOIN constraints AS cs ON cs.table_schema = c.table_schema
-    AND cs.table_name = c.table_name
-    AND cs.column_name = c.column_name
-  GROUP BY
-    c.table_schema,
-    c.table_name,
-    c.column_name,
-    c.data_type,
-    c.is_nullable,
-    c.column_default
-  HAVING
-    c.table_schema LIKE '%public%'
-    AND c.table_name LIKE '%${1:table}%'
+    v
+  WHERE
+    table_schema LIKE '%public%'
+    AND table_name LIKE '%${1:table}%'
   ORDER BY
     table_schema,
     table_name,
+    is_nullable DESC,
+    data_type,
+    column_default,
+    constraints,
+    constraint_names,
     column_name;
 
   $0
@@ -104,31 +122,45 @@ abbr ANSI -> constraints
 
 snippet ansi-fk
 abbr ANSI -> foreign keys
+  WITH
+    v AS (
+      SELECT
+        kcu2.table_schema AS ref_shm,
+        kcu2.table_name AS ref_tbl,
+        kcu2.column_name AS ref_col,
+        kcu1.table_schema AS shm,
+        kcu1.table_name AS tbl,
+        kcu1.column_name AS col
+      FROM
+        information_schema.referential_constraints AS rc
+        JOIN information_schema.key_column_usage AS kcu1 ON kcu1.constraint_schema = rc.constraint_schema
+        AND kcu1.constraint_name = rc.constraint_name
+        JOIN information_schema.key_column_usage AS kcu2 ON kcu2.constraint_schema = rc.unique_constraint_schema
+        AND kcu2.constraint_name = rc.unique_constraint_name
+    )
   SELECT
-    kcu1.table_schema AS schema,
-    kcu1.table_name AS table,
-    kcu1.column_name AS column,
-    kcu2.table_schema AS referenced_schema,
-    kcu2.table_name AS referenced_table,
-    kcu2.column_name AS referenced_column
+    *
   FROM
-    information_schema.referential_constraints AS rc
-    JOIN information_schema.key_column_usage AS kcu1 ON kcu1.constraint_schema = rc.constraint_schema
-    AND kcu1.constraint_name = rc.constraint_name
-    JOIN information_schema.key_column_usage AS kcu2 ON kcu2.constraint_schema = rc.unique_constraint_schema
-    AND kcu2.constraint_name = rc.unique_constraint_name
+    v
   WHERE
     (
-      kcu1.table_schema LIKE '%public%'
-      OR kcu2.table_schema LIKE '%public%'
+      shm LIKE '%public%'
+      OR ref_shm LIKE '%public%'
     )
     AND (
-      kcu1.table_name LIKE '%${1:table}%'
-      OR kcu2.table_name LIKE '%${1:table}%'
+      tbl LIKE '%${1:table}%'
+      OR ref_tbl LIKE '%${1:table}%'
     )
     AND (
-      kcu1.column_name LIKE '%${2:column}%'
-      OR kcu2.column_name LIKE '%${2:column}%'
-    );
+      col LIKE '%${2:column}%'
+      OR ref_col LIKE '%${2:column}%'
+    )
+  ORDER BY
+    ref_shm,
+    ref_tbl,
+    ref_col,
+    shm,
+    tbl,
+    col;
 
   $0
