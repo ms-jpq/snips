@@ -49,7 +49,6 @@ snippet prelude
 
   from argparse import ArgumentParser, Namespace
   from pathlib import Path
-  from sys import exit
 
   _TOP_LEVEL = Path(__file__).resolve(strict=True).parent
 
@@ -59,16 +58,11 @@ snippet prelude
       return parser.parse_args()
 
 
-  def main() -> int:
+  def main() -> None:
       args = _parse_args()
       $0
-      return 0
 
 
   if __name__ == "__main__":
-      try:
-          code = main()
-      except KeyboardInterrupt:
-          exit(130)
-      else:
-          exit(code)
+      main()
+
