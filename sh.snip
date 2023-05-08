@@ -65,7 +65,7 @@ snippet lc
 
 snippet trap
   cleanup() {
-    ${0::}
+    ${0:pkill -P \$\$}
   }
 
   trap -- cleanup EXIT
