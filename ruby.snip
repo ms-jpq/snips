@@ -2,24 +2,25 @@ snippet prelude
   #!/usr/bin/env -S -- ruby
   # frozen_string_literal: true
 
-  ::Kernel.require('optparse')
+  Kernel.require('optparse')
 
-  ::Dir.chdir(__dir__)
+  Dir.chdir(__dir__)
 
-  ::Module.new do
-    options, args =
-      {}.then do |into|
-        parsed =
-          ::OptionParser
-            .new do |parser|
-              parser.on(${1:'--verbose', ::TrueClass})
-            end
-            .parse(::ARGV, into:)
-        [into, parsed]
-      end
+  options, args =
+    {}.then do |into|
+      parsed =
+        OptionParser
+          .new do
+            _1.on('--verbose VERBOSE', TrueClass)
+            _1.on('--name [NAME]', String)
+          end
+          .parse(ARGV, into:)
+      [into, parsed]
+    end
 
-    ::Kernel.exec(${0:*::ARGV})
-  end
+  verbose, name = options.fetch_values(:verbose, :name)
+
+  ${0:Kernel.exec(*ARGV)}
 
 
 
