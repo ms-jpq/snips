@@ -43,22 +43,19 @@ snippet which
 
 
 snippet failglob
-alias glob
   shopt -s failglob globstar
 
   $0
 
 
 snippet nullglob
-alias glob
   shopt -s nullglob globstar
 
   $0
 
 
 snippet lc
-  export LC_ALL=C
-  export LANG=C
+  export -- LANG=C LC_ALL=C
 
   $0
 
@@ -85,18 +82,11 @@ snippet join
   printf -- '%q ' $0
 
 
-snippet pass
-abbr :
-  :
-
-
 snippet stderr
-alias err
   >&2
 
 
 snippet stdout
-alias out
   2>&1
 
 
