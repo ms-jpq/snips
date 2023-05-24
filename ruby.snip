@@ -4,6 +4,11 @@ snippet prelude
 
   Kernel.require('optparse')
 
+  Thread.tap do
+    _1.abort_on_exception = true
+    _1.report_on_exception = false
+  end
+
   Dir.chdir(__dir__)
 
   options, args =
