@@ -4,6 +4,7 @@ snippet prelude
   MAKEFLAGS += --warn-undefined-variables
   SHELL := bash
   .DELETE_ON_ERROR:
+  .ONESHELL:
   .RECIPEPREFIX = >
   .SHELLFLAGS := -Eeuo pipefail -O dotglob -O failglob -O globstar -c
 
@@ -17,4 +18,12 @@ snippet prelude
   clobber: clean
   > rm -rf -- 
 
+  $0
+
+
+snippet .PHONY
+alias .phony
+alias phony
+  .PHONY: ${1:target}
+  ${1:target}:
   $0
