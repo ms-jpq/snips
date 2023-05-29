@@ -1,0 +1,20 @@
+snippet prelude
+  MAKEFLAGS += --jobs
+  MAKEFLAGS += --no-builtin-rules
+  MAKEFLAGS += --warn-undefined-variables
+  SHELL := bash
+  .DELETE_ON_ERROR:
+  .RECIPEPREFIX = >
+  .SHELLFLAGS := -Eeuo pipefail -O dotglob -O failglob -O globstar -c
+
+  .DEFAULT_GOAL := help
+
+  .PHONY: clean clobber
+
+  clean:
+  > rm -rf -- 
+
+  clobber: clean
+  > rm -rf -- 
+
+  $0
