@@ -1,11 +1,11 @@
 snippet prelude
   MAKEFLAGS += --jobs
   MAKEFLAGS += --no-builtin-rules
+  MAKEFLAGS += --output-sync=line
   MAKEFLAGS += --warn-undefined-variables
   SHELL := bash
   .DELETE_ON_ERROR:
   .ONESHELL:
-  .RECIPEPREFIX = >
   .SHELLFLAGS := -Eeuo pipefail -O dotglob -O failglob -O globstar -c
 
   .DEFAULT_GOAL := help
@@ -13,10 +13,12 @@ snippet prelude
   .PHONY: clean clobber
 
   clean:
-  > rm -rf -- 
+    rm -rf -- 
 
   clobber: clean
-  > rm -rf -- 
+    rm -rf -- 
+
+  include makelib/*.mk
 
   $0
 
@@ -25,5 +27,6 @@ snippet .PHONY
 alias .phony
 alias phony
   .PHONY: ${1:target}
+
   ${1:target}:
-  $0
+    ${0:@echo recipe}
