@@ -29,4 +29,28 @@ alias phony
   .PHONY: ${1:target}
 
   ${1:target}:
-    ${0:@echo recipe}
+    ${0:...}
+
+
+snippet println
+  printf -- '%s\\n' $0
+  $0
+
+
+snippet mkdir
+  mkdir --parents -- "\$\$(dirname -- '\$@')"
+  $0
+
+
+snippet cp
+  cp --recursive --force --reflink=auto -- '\$<' '\$@'
+  $0
+
+
+snippet mv
+  mv --force -- '\$<' '\$@'
+  $0
+
+
+snippet watch
+  watchexec --shell none --restart -- $0
