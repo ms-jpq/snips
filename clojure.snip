@@ -6,3 +6,12 @@ snippet prelude
 
 snippet pp
   (cljs.pprint/pprint $0)
+
+
+snippet reflect
+  (do
+    (require '[clojure.reflect]
+             '[clojure.pprint])
+    (->> $0
+         clojure.reflect/reflect
+         clojure.pprint/pprint))
