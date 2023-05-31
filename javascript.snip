@@ -1,17 +1,5 @@
-snippet iffe
-  const ${1:var} = (() => {
-    ${0}
-  })()
+snippet prelude
+  #!/usr/bin/env -S -- node
 
+  $0
 
-snippet aiffe
-  const ${1:var} = await (async () => {
-    ${0}
-  })()
-
-
-snippet main
-  const main = async () => {
-    ${0}
-  }
-  await main()
