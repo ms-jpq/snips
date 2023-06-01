@@ -12,9 +12,11 @@ snippet prelude
   .PHONY: clean clobber
 
   clean:
+    shopt -u failglob
     rm -rf -- 
 
   clobber: clean
+    shopt -u failglob
     rm -rf -- 
 
   include makelib/*.mk
