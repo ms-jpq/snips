@@ -28,6 +28,28 @@ snippet prelude
   ${0:Kernel.exec(*ARGV)}
 
 
+snippet preluder
+  # frozen_string_literal: true
+
+  Kernel.require('rake/phony')
+  Kernel.require('rake/clean')
+
+  Rake.application.options.tap do
+    _1.always_multitask = true
+    _1.rakelib.clear.freeze
+    _1.thread_pool_size = Etc.nprocessors * 6
+    _1.trace_rules = ARGV.intersect?(%w[-v --verbose])
+  end
+
+  Thread.tap do
+    _1.abort_on_exception = true
+    _1.report_on_exception = false
+  end
+
+  task(:default) do
+    $0
+  end
+
 
 snippet bug
 alias debug
