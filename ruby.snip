@@ -2,7 +2,7 @@ snippet prelude
   #!/usr/bin/env -S -- ruby
   # frozen_string_literal: true
 
-  Kernel.require('optparse')
+  require('optparse')
 
   Thread.tap do
     _1.abort_on_exception = true
@@ -23,16 +23,16 @@ snippet prelude
       [into, parsed]
     end
 
-  verbose, name = options.fetch_values(:verbose, :name)
+  options => { verbose:, name: }
 
-  ${0:Kernel.exec(*ARGV)}
+  ${0:exec(*ARGV)}
 
 
 snippet preluder
   # frozen_string_literal: true
 
-  Kernel.require('rake/phony')
-  Kernel.require('rake/clean')
+  require('rake/phony')
+  require('rake/clean')
 
   Rake.application.options.tap do
     _1.always_multitask = true
