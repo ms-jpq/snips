@@ -33,6 +33,28 @@ abbr ANSI -> tables
   $0
 
 
+snippet ansi-views
+abbr ANSI -> views
+  SELECT
+    table_name,
+    ARRAY_AGG(column_name) AS columns,
+    table_schema
+  FROM
+    information_schema.views
+    JOIN information_schema.columns USING (table_schema, table_name)
+  GROUP BY
+    table_schema,
+    table_name
+  HAVING
+    table_schema LIKE '%public%'
+    AND table_name LIKE '%${1:view}%'
+  ORDER BY
+    table_schema,
+    table_name;
+
+  $0
+
+
 snippet ansi-columns
 abbr ANSI -> columns
   SELECT
