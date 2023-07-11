@@ -1,14 +1,17 @@
 snippet prelude
-  #!/usr/bin/env -S -- bash -Eeuo pipefail -O dotglob -O nullglob -O extglob -O failglob -O globstar
+  #!/usr/bin/env -S -- bash -Eeu -O dotglob -O nullglob -O extglob -O failglob -O globstar
 
-  cd -- "\$(dirname -- "\$0")"
+  set -o pipefail
+
+  cd -- "\${0%/*}"
 
   ${0:exec --}
 
 snippet parse
 abbr argparse
   LONG_OPTS='verbose'
-  eval set -- "\$(getopt --options='' --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
+  GO="\$(getopt --options='' --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
+  eval set -- "\$GO"
 
   if [[ \$# -eq 1 ]]; then
     head --lines 5 -- "\$0"
@@ -16,16 +19,13 @@ abbr argparse
   fi
 
   VERBOSE=0
-  while true; do
+  while ((\$#)); do
     case "\$1" in
-    -v | --verbose)
+    --verbose)
       VERBOSE=1
-      shift
+      shift -- 1
       ;;
-    --)
-      shift
-      ;;
-    *)
+    -- | *)
       break
       ;;
     esac
@@ -34,7 +34,7 @@ abbr argparse
   $0
 
 snippet cd
-  cd -- "\$(dirname -- "\$0")"
+  cd -- "\${0%/*}"
   $0
 
 
@@ -92,8 +92,8 @@ snippet stdout
 
 snippet readarray
 alias ra
-abbr read <(cmd)
-  readarray -t -d \$'\\n' -- ${2:ARRAY} < <(${1:command})
+abbr read <<<
+  readarray -t -d \$'\\n' -- ${2:ARRAY} <<<"\${1:VAR}"
   $0
 
 
@@ -101,6 +101,11 @@ snippet array
   ${1:ARRAY}=(
     ${2:item}
   )
+  $0
+
+
+snippet map
+  declare -A -- ${1:MAP}=()
   $0
 
 
