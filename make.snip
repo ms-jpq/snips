@@ -16,11 +16,11 @@ snippet prelude
 
   clean:
     shopt -u failglob
-    rm -rf -- 
+    rm -rf --
 
   clobber: clean
     shopt -u failglob
-    rm -rf -- 
+    rm -rf --
 
   include makelib/*.mk
 
@@ -34,6 +34,12 @@ alias phony
 
   ${1:target}:
     ${0:...}
+
+
+snippet define
+  define ${1:target}
+    ${0:...}
+  endef
 
 
 snippet println
