@@ -154,4 +154,12 @@ snippet ifs
 snippet shellcheck-disable
 alias sc
 alias disable
-  # shellcheck disable=SC${0:0000}
+  # shellcheck disable=${0:0000}
+
+
+snippet dirname
+  "\${${0:path}%/*}"
+
+
+snippet basename
+  "\${${0:path}##*/}"
