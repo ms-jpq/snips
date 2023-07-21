@@ -11,7 +11,7 @@ snippet parse
 abbr argparse
   LONG_OPTS='verbose'
   GO="\$(getopt --options='' --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
-  eval set -- "\$GO"
+  eval -- set -- "\$GO"
 
   if [[ \$# -eq 1 ]]; then
     head --lines 5 -- "\$0"
