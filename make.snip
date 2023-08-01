@@ -47,14 +47,8 @@ snippet println
   $0
 
 
-snippet cp
-  cp --recursive --force --reflink=auto -- '\$<' '\$@'
-  $0
-
-
-snippet mv
-  mv --force -- '\$<' '\$@'
-  $0
+snippet glob
+  \$(shell printf -- '%s ' ${0:./**/*})
 
 
 snippet watch
