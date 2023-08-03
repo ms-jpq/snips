@@ -72,9 +72,10 @@ snippet trap
   trap -- cleanup EXIT
 
 
-snippet hash
-  hash -- ${1:BIN_1} ${2:BIN_2}
-  $0
+snippet shellcheck-disable
+alias sc
+alias disable
+  # shellcheck disable=${0:0000}
 
 
 snippet println
@@ -145,16 +146,18 @@ snippet tr
   "\${${1:VARIABLE}//'${2:GLOB}'/'${3:REPLACE}'}"
 
 
+snippet upper
+  "\${${0:path}^^/}"
+
+
+snippet lower
+  "\${${0:path},,}"
+
+
 snippet ifs
   IFS=\$'${1:\\n}'
   $0
   unset -- IFS
-
-
-snippet shellcheck-disable
-alias sc
-alias disable
-  # shellcheck disable=${0:0000}
 
 
 snippet dirname
