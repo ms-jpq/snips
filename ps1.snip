@@ -8,6 +8,12 @@ snippet prelude
 
   Set-Location -- \$PSScriptRoot
 
+  $0
 
-  ${0:Switch-Process -- }
 
+snippet which
+  Get-Command -- $0
+
+
+snippet exec
+  Switch-Process -- $0
