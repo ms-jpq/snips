@@ -9,22 +9,13 @@ snippet prelude
 
 snippet parse
 abbr argparse
-  LONG_OPTS='verbose'
-  GO="\$(getopt --options='' --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
+  OPTS=''
+  LONG_OPTS=''
+  GO="\$(getopt --options="\$OPTS" --longoptions="\$LONG_OPTS" --name="\$0" -- "\$@")"
   eval -- set -- "\$GO"
 
-  if [[ \$# -eq 1 ]]; then
-    head --lines 5 -- "\$0"
-    exit 1
-  fi
-
-  VERBOSE=0
   while ((\$#)); do
     case "\$1" in
-    --verbose)
-      VERBOSE=1
-      shift -- 1
-      ;;
     --)
       shift -- 1
       break
