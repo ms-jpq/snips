@@ -7,6 +7,15 @@ snippet prelude
 
   $0
 
+
+snippet shopt
+  set -Eeu
+  set -o pipefail
+  shopt -s -- dotglob nullglob extglob failglob globstar
+
+  $0
+
+
 snippet parse
 abbr argparse
   OPTS=''
@@ -27,6 +36,7 @@ abbr argparse
   done
 
   $0
+
 
 snippet cd
   cd -- "\${0%/*}"
