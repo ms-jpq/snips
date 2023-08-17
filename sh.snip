@@ -85,7 +85,7 @@ alias pl
 
 
 snippet join
-  printf -- '%q ' $0
+  printf -v ${1:VAR} -- '%q ' $0
 
 
 snippet stderr
@@ -100,6 +100,13 @@ snippet readarray
 alias ra
 abbr read <<<
   readarray -t -d \$'\\n' -- ${2:ARRAY} <<<"${1:VAR}"
+  $0
+
+
+snippet readline
+alias ra
+abbr read -r -d ''
+  read -r -d '' -- ${1:VAR}
   $0
 
 

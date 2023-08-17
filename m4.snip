@@ -1,0 +1,183 @@
+snippet prelude
+  #!/usr/bin/env -S -- m4 --fatal-warnings --prefix-builtins
+
+  $0
+
+
+snippet dnl
+  m4_dnl
+
+
+snippet dumpdef
+  m4_dumpdef(`${1:name}')
+
+
+snippet traceon
+  m4_traceon(`${1:name}', `${2:name}')
+
+
+snippet include
+  m4_include(`${1:file.m4}')
+
+
+snippet define
+  m4_define(`${1:name}', ${2:macro})
+
+
+snippet changequote
+  m4_changequote(${1:`['}, ${2:`]'})
+
+
+snippet changecom
+  m4_changecom(${1:`<!--'}, ${2:`-->'})
+
+
+snippet divert
+  m4_divert(`${1:divnum}')
+
+
+snippet undivert
+  m4_undivert(`${1:divnum}')
+
+
+snippet cleardivert
+  m4_cleardivert(`${1:divnum}')
+
+
+snippet divnum
+  m4_divnum
+
+
+snippet m4wrap
+  m4_m4wrap(`${1:trap...}')
+
+
+snippet ifdef
+  m4_ifdef(`${1:macro}', ${2:yes}, ${3:no})
+
+
+snippet ifelse
+  m4_ifelse(${1:`lhs'}, ${2:`rhs'}, ${3:`yes'}, ${4:`no'})
+
+
+snippet shift
+  m4_shift(${1:*argv})
+
+
+snippet reverse
+  m4_reverse(${1:*argv})
+
+
+snippet cond
+  m4_cond(${1:`lhs'}, ${2:`rhs'}, ${3:`yes'}, ${4:`lhs'}, ${5:`rhs'}, ${6:`yes'}, ${7:`no'})
+
+
+snippet join
+  m4_join(`${1:sep}', ${2:*argv})
+
+
+snippet quote
+  m4_quote(${1:*argv})
+
+
+snippet dquote
+abbr double quote
+  m4_dquote(${1:*argv})
+
+
+snippet dquote_elt
+abbr double quote each element
+  m4_dquote_elt(${1:*argv})
+
+
+snippet argn
+  m4_argn(`${1:n}', ${2:*argv})
+
+
+snippet foreach
+  m4_foreach(`${1:macro}', ${2:(list)}, `${3:expr}')
+
+
+snippet foreachq
+  m4_foreachq(`${1:macro}', ${2:`list'}, `${3:expr}')
+
+
+snippet len
+  m4_len(`${1:text}')
+
+
+snippet index
+  m4_index(`${1:str}', `${2:substr}')
+
+
+snippet regexp
+  m4_regexp(${1:`str'}, ${2:`re'}, ${3:`replace'})
+
+
+snippet substr
+  m4_substr(`${1:str}', `${2:pos}', `${3:len}')
+
+
+snippet translit
+  m4_translit(`${1:str}', `${2:*char}', `${3:*char}')
+
+
+snippet patsubst
+  m4_patsubst(`${1:str}', `${2:re}', `${3:replace}')
+
+
+snippet upcase
+  m4_upcase(`${1:str}')
+
+
+snippet downcase
+  m4_downcase(`${1:str}')
+
+
+snippet capitalize
+  m4_capitalize(`${1:str}')
+
+
+snippet format
+  m4_format(${1:`fmt'}, ${2:*argv})
+
+
+snippet incr
+  m4_incr(`${1:n}')
+
+
+snippet decr
+  m4_decr(`${1:n}')
+
+
+snippet eval
+  m4_eval(${1:`math'})
+
+
+snippet syscmd
+  m4_syscmd(${1:`sh'})
+
+
+snippet esyscmd
+  m4_esyscmd(${1:`sh'})
+
+
+snippet sysval
+alias $?
+  m4_sysval
+
+
+snippet mkstemp
+  m4_mkstemp(`${1:template}XXXXXX')
+
+
+snippet errprint
+  m4_errprint(${1:*argv})
+
+
+snippet m4exit
+  m4_exit(`${1:code}')
+
+
+snippet fatal_error
+  m4_fatal_error(`${1:msg}')
