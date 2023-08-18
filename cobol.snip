@@ -1,12 +1,12 @@
 snippet prelude
-  #!/usr/bin/env -S -- bash -Eeuo pipefail -O dotglob -O nullglob -O extglob -O failglob -O globstar -x
+  #!/usr/bin/env -S -- bash -Eeuo pipefail
          *> . || cobc -Wall -x "\$0" -o "\${TMP:="\$(mktemp)"}" && "\$TMP" "\$@"; exec -- rm -v -fr -- "\$TMP"
          >>SOURCE FORMAT FREE
 
+  IDENTIFICATION DIVISION.
   PROGRAM-ID. Hello.
   PROCEDURE DIVISION.
 
   DISPLAY "Hello, world!".
-  STOP RUN.
 
   $0

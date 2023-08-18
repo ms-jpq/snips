@@ -99,7 +99,7 @@ snippet stdout
 snippet readarray
 alias ra
 abbr read <<<
-  readarray -t -d \$'\\n' -- ${2:ARRAY} <<<"${1:VAR}"
+  readarray -t -d \$'\\0' -- ${2:ARRAY} <<<"${1:VAR}"
   $0
 
 
