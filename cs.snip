@@ -1,4 +1,7 @@
 snippet prelude
   #!/usr/bin/env -S -- dotnet-script
 
+  Environment.CurrentDirectory = Path.GetDirectoryName(Path.Combine(
+    Environment.CurrentDirectory, Environment.GetCommandLineArgs()[1]));
+
   $0
