@@ -27,7 +27,7 @@ snippet defn
 
 
 snippet traceon
-  m4_traceon([${1:name], [name}])
+  m4_traceon([${1:name}])
 
 
 snippet include
@@ -39,7 +39,7 @@ snippet sinclude
 
 
 snippet define
-  m4_define([${1:name}], ${2:macro})
+  m4_define([${1:name}], [${2:macro}])
 
 
 snippet pushdef
@@ -75,7 +75,7 @@ snippet m4wrap
 
 
 snippet ifdef
-  m4_ifdef([${1:name}], ${2:yes}, ${3:no})
+  m4_ifdef([${1:name}], [${2:yes}], [${3:no}])
 
 
 snippet ifelse
@@ -95,7 +95,7 @@ snippet index
 
 
 snippet regexp
-  m4_regexp(${1:[str]}, ${2:[re]}, ${3:[replace]})
+  m4_regexp([${1:str}], [${2:re}], [${3:replace}])
 
 
 snippet substr
@@ -123,15 +123,15 @@ snippet decr
 
 
 snippet eval
-  m4_eval(${1:[math]})
+  m4_eval([${1:math}])
 
 
 snippet syscmd
-  m4_syscmd(${1:[sh]})
+  m4_syscmd([${1:sh}])
 
 
 snippet esyscmd
-  m4_esyscmd(${1:[sh]})
+  m4_esyscmd([${1:sh}])
 
 
 snippet sysval
@@ -156,4 +156,4 @@ snippet or
 
 
 snippet for
-  m5_for([${1:token}], [${2:expr}], ${3:*args})
+  m5_for([${1:sym}], [${2:expr}], ${3:*args})
