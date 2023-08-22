@@ -48,8 +48,7 @@ alias .phony
 alias phony
   .PHONY: ${1:target}
 
-  ${1:target}:
-    ${0:...}
+  ${1:target}: ${0:...}
 
 
 snippet define
