@@ -1,6 +1,6 @@
 snippet prelude
   #!/usr/bin/env -S -- m4 --fatal-warnings --prefix-builtins
-  m4_divert(`-1')m4_dnl
+  m4_divert(`-1')
   m4_changequote(`[', `]')
   m4_changecom([], [])
   m4_define([m5_or], [m4_ifdef([\$1], [\$1], [\$2])])
@@ -44,7 +44,7 @@ snippet define
 
 
 snippet pushdef
-  m4_pushdef([${1:name}])
+  m4_pushdef([${1:name}], [${2:macro}])
 
 
 snippet popdef
