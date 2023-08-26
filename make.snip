@@ -63,7 +63,7 @@ snippet println
 
 
 snippet glob
-  \$(shell printf -- '%s ' ${0:./**/*})
+  \$(shell shopt -u failglob && printf -- '%s ' ${0:./**/*})
 
 
 snippet watch
