@@ -196,5 +196,6 @@ abbr ANSI -> foreign keys
 
 
 snippet readonly
-  SET default_transaction_read_only = on;
+  SET SESSION CHARACTERISTICS AS TRANSACTION READ ONLY;
+
   $0
