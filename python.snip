@@ -14,24 +14,7 @@ snippet enum
 snippet prelude
   #!/usr/bin/env -S -- PYTHONSAFEPATH= python3
 
-  from argparse import ArgumentParser, Namespace
-  from pathlib import Path
-
-  _TOP_LEVEL = Path(__file__).resolve(strict=True).parent
-
-
-  def _parse_args() -> Namespace:
-      parser = ArgumentParser()
-      return parser.parse_args()
-
-
-  def main() -> None:
-      args = _parse_args()
-      $0
-
-
-  if __name__ == "__main__":
-      main()
+  $0
 
 
 snippet ignore
