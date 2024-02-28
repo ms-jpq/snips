@@ -56,3 +56,11 @@ snippet agen
   (async function* () {
     $0
   })()
+
+
+snippet cast
+  /** @type {${0:type}} */ (/** @type {unknown} */ (${1:val}));
+
+
+snippet type
+  /** @type {${0:type}} */
