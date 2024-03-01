@@ -131,9 +131,9 @@ snippet for
 
 snippet heredoc
 alias hd
-  read -r -d '' -- ${1:VARIABLE} <<-EOF || true
-    ${0:...}
-  EOF
+  read -r -d '' -- ${2:VARIABLE} <<-'${1:${EOF/.*/${0:/upcase}/s}}' || true
+  ${0:...}
+  ${1:EOF}
 
 
 snippet tee
