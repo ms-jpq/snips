@@ -19,7 +19,7 @@ abbr ANSI -> tables
   SELECT
     table_type,
     table_name,
-    ARRAY_AGG(column_name) AS columns,
+    STRING_AGG(column_name, ',' ORDER BY column_name) AS columns,
     table_schema
   FROM
     information_schema.tables
