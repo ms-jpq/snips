@@ -2,7 +2,20 @@ snippet prelude
   // ; exec go run "\$0" "\$@"
   package main
 
+  import (
+    "fmt"
+    "os"
+    "path"
+  )
+
   func main() {
+    self, err := os.Executable()
+    if err != nil {
+      panic(err)
+    }
+    dir := path.Dir(self)
+    fmt.Println(dir)
+
     $0
   }
 
