@@ -4,6 +4,7 @@ snippet prelude
 
   import (
     "fmt"
+    "log"
     "os"
     "path/filepath"
   )
@@ -11,7 +12,7 @@ snippet prelude
   func main() {
     self, err := os.Executable()
     if err != nil {
-      panic(err)
+      log.Fatal(err)
     }
     dir := filepath.Dir(self)
     os.Chdir(dir)
