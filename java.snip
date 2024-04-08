@@ -2,7 +2,7 @@ snippet prelude
   // ; exec -- java -Dprogram.name="\$0" "\$0" "\$@"
   import java.nio.file.Paths;
 
-  public class javafmt {
+  public class ${TM_FILENAME_BASE} {
     public static void main(String args[]) {
       final var self = Paths.get(System.getProperty("program.name"));
 
