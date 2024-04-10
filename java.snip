@@ -2,8 +2,8 @@ snippet prelude
   // ; exec java -ea -Dprogram.name="\$0" "\$0" "\$@"
   import java.nio.file.Paths;
 
-  public class ${TM_FILENAME_BASE} {
-    public static void main(String args[]) {
+  public class ${TM_FILENAME_BASE/(^[^.]+)/$1/} {
+    public static void main(String args[]) throws Exception {
       final var self = Paths.get(System.getProperty("program.name"));
 
       $0
