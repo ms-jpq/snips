@@ -1,4 +1,9 @@
 snippet prelude
   #!/usr/bin/env -S -- runhaskell
 
-  $0
+  import           System.Exit (exitSuccess)
+
+  main =
+    $0
+
+    exitSuccess
