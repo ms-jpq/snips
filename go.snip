@@ -24,3 +24,19 @@ snippet prelude
 
 snippet bug
   fmt.Printf("%#v\\n", $0)
+
+
+snippet testm
+  func TestMain(m *testing.M) {
+    code := m.Run()
+    $0
+    os.Exit(code)
+  }
+
+
+snippet unwind
+  defer func() {
+    if r := recover(); r != nil {
+      $0
+    }
+  }()
