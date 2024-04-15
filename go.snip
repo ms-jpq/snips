@@ -40,3 +40,10 @@ snippet unwind
       $0
     }
   }()
+
+
+snippet pt
+  func Test${1:1}(t *testing.T) {
+    t.Parallel()
+    $0
+  }
