@@ -13,7 +13,7 @@ snippet prelude
     log.SetFlags(log.Lshortfile)
     self, err := os.Executable()
     if err != nil {
-      log.Panic(err)
+      log.Panicln(err)
     }
     dir := filepath.Dir(self)
     os.Chdir(dir)
