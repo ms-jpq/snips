@@ -19,7 +19,9 @@ snippet prelude
       log.Panicln(err)
     }
     dir := filepath.Dir(self)
-    os.Chdir(dir)
+    if err := os.Chdir(dir); err != nil {
+      log.Panicln(err)
+    }
     fmt.Println(dir)
 
     $0
@@ -27,7 +29,7 @@ snippet prelude
 
 
 snippet bug
-  fmt.Printf("%#v\\n", $0)
+  log.Printf("%#v\\n", $0)
 
 
 snippet testm
