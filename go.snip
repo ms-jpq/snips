@@ -9,8 +9,11 @@ snippet prelude
     "path/filepath"
   )
 
-  func main() {
+  func init() {
     log.SetFlags(log.Lshortfile)
+  }
+
+  func main() {
     self, err := os.Executable()
     if err != nil {
       log.Panicln(err)
