@@ -67,4 +67,17 @@ snippet type
 
 
 snippet bug
+  const { inspect: ins } = require('node:util');
+  ins.defaultOptions = {
+    ...ins.defaultOptions,
+    breakLength: 120,
+    colors: true,
+    depth: Infinity,
+    getters: true,
+    maxArrayLength: 12,
+    numericSeparator: true,
+    showProxy: true,
+    sorted: true,
+  };
   debugger;
+  $0
