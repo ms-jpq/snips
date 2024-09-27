@@ -1,5 +1,5 @@
 snippet prelude
-  #!/usr/bin/env -S -- bash -Eeu -O dotglob -O nullglob -O extglob -O failglob -O globstar
+  #!/usr/bin/env -S -- bash -Eeu -o pipefail -O dotglob -O nullglob -O extglob -O failglob -O globstar
 
   set -o pipefail
 
@@ -13,8 +13,7 @@ snippet nofail
 
 
 snippet shopt
-  set -Eeu
-  set -o pipefail
+  set -Eeuo pipefail
   shopt -s -- dotglob nullglob extglob failglob globstar
 
   $0
