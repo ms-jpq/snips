@@ -67,24 +67,24 @@ snippet type
 
 
 snippet bug
-  const { inspect: ins } = require('node:util');
-  ins.defaultOptions = {
-    ...ins.defaultOptions,
-    breakLength: 120,
-    colors: true,
-    depth: Infinity,
-    getters: true,
-    maxArrayLength: 12,
-    numericSeparator: true,
-    showProxy: true,
-    sorted: true,
-  };
+  {
+    const { inspect: ins } = require('node:util');
+    ins.defaultOptions = {
+      ...ins.defaultOptions,
+      breakLength: 120,
+      colors: true,
+      depth: 3,
+      getters: true,
+      maxArrayLength: 12,
+      numericSeparator: true,
+      showProxy: true,
+      sorted: true,
+    };
 
+    console.log(ins($0));
 
-  console.log(ins($0));
-
-
-  debugger;
+    debugger;
+  }
 
 
 snippet inspect
