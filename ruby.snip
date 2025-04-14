@@ -3,6 +3,8 @@ snippet prelude
   # frozen_string_literal: true
   # typed: strong
 
+  Dir.chdir(File.Filename.dirname(__FILE__))
+
   $0
 
 
