@@ -4,6 +4,7 @@ snippet prelude
   Set-StrictMode -Version 'Latest'
   \$ErrorActionPreference = 'Stop'
   \$PSStyle.OutputRendering = 'PlainText'
+  \$ProgressPreference = 'SilentlyContinue'
   \$PSNativeCommandUseErrorActionPreference = \$true
 
   Set-Location -- \$PSScriptRoot
