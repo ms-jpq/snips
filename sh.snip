@@ -185,3 +185,6 @@ snippet perl
 
 snippet watch
   watchexec --shell none --restart -- $0
+
+snippet timeout
+  perl -w -e 'alarm shift; (exec @ARGV) || die' -- ${0:TIMEOUT}
