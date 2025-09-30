@@ -1,5 +1,6 @@
 snippet prelude
   #!/usr/bin/env -S -- node
+  "use strict";
 
   import { chdir } from "node:process";
   import { dirname } from "node:path";
@@ -13,7 +14,6 @@ snippet prelude
 
 snippet osascript
   #!/usr/bin/env -S -- osascript -l JavaScript
-
   "use strict";
 
   ObjC.import("stdlib");
