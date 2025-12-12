@@ -7,7 +7,7 @@ alias shebang
   main(_Argv) :-
       current_prolog_flag(os_argv, [_, Arg0|_]),
       file_directory_name(Arg0, Dir),
-      chdir(Dir),
+      working_directory(_, Dir),
 
       ${0:true.}
 
