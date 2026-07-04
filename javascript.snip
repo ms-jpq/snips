@@ -3,11 +3,8 @@ snippet prelude
   "use strict";
 
   import { chdir } from "node:process";
-  import { dirname } from "node:path";
-  import { fileURLToPath } from "node:url";
 
-  const dir = dirname(fileURLToPath(import.meta.url));
-  chdir(dir);
+  chdir(import.meta.dirname);
 
   $0
 
