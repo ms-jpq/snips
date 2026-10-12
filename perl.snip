@@ -1,12 +1,13 @@
 snippet prelude
-  #!/usr/bin/env -S -- PERL_UNICODE=ASD perl -w
+  #!/usr/bin/env -S -- PERL_UNICODE=ASD perl
 
   use Carp;
   use English;
   use File::Basename;
-  use autodie;
+  use autodie qw(:all);
   use strict;
   use utf8;
+  use warnings FATAL => 'all';
 
   chdir dirname(__FILE__);
 
