@@ -21,37 +21,6 @@ snippet multiline
   $0
 
 
-snippet %rec
-alias rec
-  %rec: ${1:record}
-
-  $0
-
-
-snippet %doc
-alias doc
-  %doc: ${1:description}
-  $0
-
-
-snippet %key
-alias key
-  %key: ${1:field}
-  $0
-
-
-snippet %type
-alias type
-  %type: ${1:field} ${2:int}
-  $0
-
-
-snippet %typedef
-alias typedef
-  %typedef: ${1:type} ${2:int}
-  $0
-
-
 snippet enum
   %type: ${1:field} enum ${2:value1 value2}
   $0
@@ -67,27 +36,9 @@ snippet reference
   $0
 
 
-snippet %mandatory
-alias mandatory
-  %mandatory: ${1:field}
-  $0
-
-
 snippet %allowed
 alias allowed
   %allowed: ${1:field}
-  $0
-
-
-snippet %prohibit
-alias prohibit
-  %prohibit: ${1:field}
-  $0
-
-
-snippet %unique
-alias unique
-  %unique: ${1:field}
   $0
 
 
@@ -97,15 +48,9 @@ alias auto
   $0
 
 
-snippet %sort
-alias sort
-  %sort: ${1:field}
-  $0
-
-
-snippet %size
-alias size
-  %size: ${1:>= 1}
+snippet %confidential
+alias confidential
+  %confidential: ${1:field}
   $0
 
 
@@ -115,7 +60,68 @@ alias constraint
   $0
 
 
-snippet %confidential
-alias confidential
-  %confidential: ${1:field}
+snippet %doc
+alias doc
+  %doc: ${1:description}
+  $0
+
+
+snippet %key
+alias key
+  %key: ${1:field}
+  $0
+
+
+snippet %mandatory
+alias mandatory
+  %mandatory: ${1:field}
+  $0
+
+
+snippet %prohibit
+alias prohibit
+  %prohibit: ${1:field}
+  $0
+
+
+snippet %rec
+alias rec
+  %rec: ${1:record}
+
+  $0
+
+
+snippet %singular
+alias singular
+  %singular: ${1:field}
+  $0
+
+
+snippet %size
+alias size
+  %size: ${1:>= 1}
+  $0
+
+
+snippet %sort
+alias sort
+  %sort: ${1:field}
+  $0
+
+
+snippet %type
+alias type
+  %type: ${1:field} ${2:int}
+  $0
+
+
+snippet %typedef
+alias typedef
+  %typedef: ${1:type} ${2:int}
+  $0
+
+
+snippet %unique
+alias unique
+  %unique: ${1:field}
   $0
