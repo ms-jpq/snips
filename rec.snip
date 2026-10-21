@@ -1,0 +1,121 @@
+snippet prelude
+  %rec: ${1:record}
+  %key: ${2:id}
+  %type: $2 int
+  %auto: $2
+  %mandatory: ${3:field}
+
+  $2: ${4:0}
+  $3: ${5:value}
+  $0
+
+
+snippet field
+  ${1:field}: ${2:value}
+  $0
+
+
+snippet multiline
+  ${1:field}: ${2:text}
+  + ${3:text}
+  $0
+
+
+snippet %rec
+alias rec
+  %rec: ${1:record}
+
+  $0
+
+
+snippet %doc
+alias doc
+  %doc: ${1:description}
+  $0
+
+
+snippet %key
+alias key
+  %key: ${1:field}
+  $0
+
+
+snippet %type
+alias type
+  %type: ${1:field} ${2:int}
+  $0
+
+
+snippet %typedef
+alias typedef
+  %typedef: ${1:type} ${2:int}
+  $0
+
+
+snippet enum
+  %type: ${1:field} enum ${2:value1 value2}
+  $0
+
+
+snippet range
+  %type: ${1:field} range ${2:0} ${3:100}
+  $0
+
+
+snippet reference
+  %type: ${1:field} rec ${2:record}
+  $0
+
+
+snippet %mandatory
+alias mandatory
+  %mandatory: ${1:field}
+  $0
+
+
+snippet %allowed
+alias allowed
+  %allowed: ${1:field}
+  $0
+
+
+snippet %prohibit
+alias prohibit
+  %prohibit: ${1:field}
+  $0
+
+
+snippet %unique
+alias unique
+  %unique: ${1:field}
+  $0
+
+
+snippet %auto
+alias auto
+  %auto: ${1:field}
+  $0
+
+
+snippet %sort
+alias sort
+  %sort: ${1:field}
+  $0
+
+
+snippet %size
+alias size
+  %size: ${1:>= 1}
+  $0
+
+
+snippet %constraint
+alias constraint
+  %constraint: ${1:field >= 0}
+  $0
+
+
+snippet %confidential
+alias confidential
+  %confidential: ${1:field}
+  $0
